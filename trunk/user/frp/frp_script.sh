@@ -10,20 +10,21 @@ mkdir -p /tmp/frp
 cat > "/tmp/frp/myfrpc.ini" <<-\EOF
 # ==========客户端配置：==========
 [common]
-server_addr = 1192.0.0.3
-server_port = 7000
-token = 12345
+server_addr = neijiang.f3322.net
+server_port = 
+token = frp
 
-#log_file = /dev/null
-#log_level = info
-#log_max_days = 3
-
+[570-s]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 22
+remote_port = 20057
 [web]
 remote_port = 6000
 type = http
-local_ip = 192.168.2.1
+local_ip = 127.0.0.1
 local_port = 80
-subdomain = test
+subdomain = 570.neijiang.f3322.net
 #host_header_rewrite = 实际你内网访问的域名，可以供公网的域名不一致，如果一致可以不写
 # ====================
 EOF
