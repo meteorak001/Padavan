@@ -2,6 +2,7 @@
 #from hiboy
 killall frpc frps
 mkdir -p /tmp/frp
+dm=` ip   addr show dev br0 |grep 'scope global '|grep -v deprecated|awk -F "." '{print $3}'`0
 #启动frp功能后会运行以下脚本
 #frp项目地址教程: https://github.com/fatedier/frp/blob/master/README_zh.md
 #请自行修改 token 用于对客户端连接进行身份验证
@@ -11,10 +12,10 @@ cat > "/tmp/frp/myfrpc.ini" <<-\EOF
 # ==========客户端配置：==========
 [common]
 server_addr = neijiang.f3322.net
-server_port = 
-token = frp
+server_port = 1982
+token = frp8882
 
-[570-s]
+["$dm"-s]
 type = tcp
 local_ip = 127.0.0.1
 local_port = 22
@@ -24,7 +25,7 @@ remote_port = 6000
 type = http
 local_ip = 127.0.0.1
 local_port = 80
-subdomain = 570.neijiang.f3322.net
+subdomain = "$dm".neijiang.f3322.net
 #host_header_rewrite = 实际你内网访问的域名，可以供公网的域名不一致，如果一致可以不写
 # ====================
 EOF
